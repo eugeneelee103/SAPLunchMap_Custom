@@ -185,7 +185,7 @@ def generate_html(all_menus, date):
     <div class="grid">
         {cards}
     </div>
-    <footer>매일 오전 11시 업데이트</footer>
+    <footer>매일 오전 9시 30분에 업데이트</footer>
 </body>
 </html>"""
 
