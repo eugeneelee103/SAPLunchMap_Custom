@@ -5,9 +5,9 @@ from datetime import datetime
 
 # ========== 설정 ==========
 STORES = [
-    {"name": "교직원 공제회",  "type": "cjfreshmeal", "id": 6848},
-    {"name": "FKI 타워",      "type": "cjfreshmeal", "id": 6083},
-    {"name": "IFC 서울",      "type": "welstory",    "id": "REST000100"},
+    {"name": "교직원 공제회",  "type": "cjfreshmeal", "id": 6848,        "url": "https://front.cjfreshmeal.co.kr/menu/today"},
+    {"name": "FKI 타워",      "type": "cjfreshmeal", "id": 6083,        "url": "https://front.cjfreshmeal.co.kr/menu/today"},
+    {"name": "IFC 서울",      "type": "welstory",    "id": "REST000100","url": "https://welplan.pmh.codes/restaurants/welstory/REST000100/ifc서울"},
 ]
 HTML_FILE = "index.html"
 # ==========================
@@ -103,10 +103,14 @@ def generate_html(all_menus, date):
                     {side}
                 </div>"""
 
+        url      = store.get("url", "")
+        link_btn = f'<a class="link-btn" href="{url}" target="_blank">🔗 메뉴 사이트 바로가기</a>' if url else ""
+
         cards += f"""
         <div class="card">
             <h2>📍 {store['name']}</h2>
             {items_html}
+            {link_btn}
         </div>"""
 
     html = f"""<!DOCTYPE html>
@@ -154,6 +158,17 @@ def generate_html(all_menus, date):
         .kcal       {{ color: #888; font-size: 0.8rem; font-weight: 400; }}
         .side       {{ font-size: 0.82rem; color: #999; margin-top: 3px; }}
         .no-menu    {{ color: #bbb; font-size: 0.9rem; }}
+        .link-btn   {{
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            background: #f0f4ff;
+            color: #0078d4;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            text-decoration: none;
+        }}
+        .link-btn:hover {{ background: #dce8ff; }}
         footer {{
             text-align: center;
             margin-top: 30px;
