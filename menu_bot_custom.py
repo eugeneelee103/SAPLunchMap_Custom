@@ -5,9 +5,9 @@ from datetime import datetime
 
 # ========== 설정 ==========
 STORES = [
-    {"name": "교직원 공제회",  "type": "cjfreshmeal", "id": 6848,        "url": "https://front.cjfreshmeal.co.kr/menu/today"},
-    {"name": "FKI 타워",      "type": "cjfreshmeal", "id": 6083,        "url": "https://front.cjfreshmeal.co.kr/menu/today"},
-    {"name": "IFC 서울",      "type": "welstory",    "id": "REST000100","url": "https://welplan.pmh.codes/restaurants/welstory/REST000100/ifc서울"},
+    {"name": "교직원 공제회",  "type": "cjfreshmeal", "id": 6848,        "url": "https://front.cjfreshmeal.co.kr/main"},
+    {"name": "FKI 타워",      "type": "cjfreshmeal", "id": 6083,        "url": "https://front.cjfreshmeal.co.kr/main"},
+    {"name": "IFC 서울",      "type": "welstory",    "id": "REST000100","url": "https://welplan.pmh.codes/restaurants/welstory/REST000100/ifc%EC%84%9C%EC%9A%B8"},
 ]
 HTML_FILE = "index.html"
 # ==========================
@@ -75,11 +75,11 @@ def fetch_all_menus(date):
                 items = get_welstory_menu(store["id"], date)
             else:
                 items = []
-            all_menus.append({"name": store["name"], "items": items})
+            all_menus.append({"name": store["name"], "items": items, "url": store.get("url", "")})
             print(f"[OK] {store['name']} 메뉴 {len(items)}개 수집")
         except Exception as e:
             print(f"[ERROR] {store['name']}: {e}")
-            all_menus.append({"name": store["name"], "items": []})
+            all_menus.append({"name": store["name"], "items": [], "url": store.get("url", "")})
     return all_menus
 
 
